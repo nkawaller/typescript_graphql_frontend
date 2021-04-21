@@ -1,11 +1,14 @@
 import Layout from "../components/Layout";
-import { Formik } from "formik";
+import { Formik, Field } from "formik";
+import InputField from "../components/fields/InputField";
 
 const register = () => {
   return (
     <Layout title="Register page">
       <Formik
-        onSubmit={() => {}}
+        onSubmit={(data) => {
+            console.log(data)
+        }}
         initialValues={{
           email: "",
           firstName: "",
@@ -13,9 +16,28 @@ const register = () => {
           password: "",
         }}
       >
-        {({values, handleSubmit}) => <form onSubmit={handleSubmit}>
-            
-            </form>}
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Field
+              name="firstName"
+              placeholder="First Name"
+              component={InputField}
+            />
+            <Field
+              name="lastName"
+              placeholder="Last Name"
+              component={InputField}
+            />
+            <Field name="email" placeholder="email" component={InputField} />
+            <Field
+              name="password"
+              placeholder="password"
+              type='password'
+              component={InputField}
+            />
+            <button type="submit">Submit</button>
+          </form>
+        )}
       </Formik>
     </Layout>
   );
