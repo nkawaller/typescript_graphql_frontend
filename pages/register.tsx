@@ -1,13 +1,19 @@
 import Layout from "../components/Layout";
 import { Formik, Field } from "formik";
 import InputField from "../components/fields/InputField";
+import { RegisterComponent } from "../generated/apolloComponents";
 
 const register = () => {
   return (
     <Layout title="Register page">
+      <RegisterComponent>
+        {(register) => (
       <Formik
-        onSubmit={(data) => {
-            console.log(data)
+        onSubmit={async data => {
+            const response = await register({variables: {
+              data
+            }})
+            console.log(response)
         }}
         initialValues={{
           email: "",
@@ -39,6 +45,8 @@ const register = () => {
           </form>
         )}
       </Formik>
+        )}
+        </RegisterComponent>
     </Layout>
   );
 };
